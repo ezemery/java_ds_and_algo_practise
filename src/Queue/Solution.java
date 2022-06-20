@@ -1,7 +1,7 @@
 package Queue;
 
 public class Solution {
-
+    //Implementing a queue using a circular array
     static class Queue {
         int[] queue;
         int head, capacity, size;

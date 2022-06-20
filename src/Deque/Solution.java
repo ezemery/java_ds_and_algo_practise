@@ -25,7 +25,6 @@ public class Solution {
             // Node temp = head;
             // temp.next = new Node(data);
             // temp.next.prev = temp;
-            // throw new RuntimeException("method not implemented");
         }
 
         public void addLast(String data) {
@@ -34,11 +33,11 @@ public class Solution {
             oldTail.next = newNode;
             newNode.prev = oldTail;
             oldTail = newNode;
-            //throw new RuntimeException("method not implemented");
         }
 
         public String removeFirst() {
 
+            return "";
             //throw new RuntimeException("method not implemented");
         }
 
