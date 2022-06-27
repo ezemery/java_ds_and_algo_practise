@@ -1,5 +1,6 @@
 package Deque;
 
+//Implementing a deque using a DoublyLinkedList
 public class Solution {
 
     static class Node{
@@ -9,53 +10,89 @@ public class Solution {
         public Node(String val){
             this.val = val;
         }
-
     }
 
     static class Deque {
-        Node head = null;
-        Node tail = null;
-        public void addFirst(String data) {
-            Node oldHead = head;
-            Node newNode = new Node(data);
-            oldHead.next = newNode;
-            newNode.prev = oldHead;
-            oldHead = newNode;
+        Node head;
+        Node tail;
+        int size;
 
-            // Node temp = head;
-            // temp.next = new Node(data);
-            // temp.next.prev = temp;
+        public Deque(){
+            head = new Node(null);
+            tail = new Node(null);
+            head.next = tail;
+            tail.prev = head;
+            size = 0;
+        }
+
+        public void addFirst(String data) {
+            addAtIndex(0, data);
         }
 
         public void addLast(String data) {
-            Node oldTail = tail;
-            Node newNode = new Node(data);
-            oldTail.next = newNode;
-            newNode.prev = oldTail;
-            oldTail = newNode;
+            addAtIndex(size, data);
         }
 
-        public String removeFirst() {
-
-            return "";
-            //throw new RuntimeException("method not implemented");
+        public void removeFirst() {
+             deleteAtIndex(0);
         }
 
-        public String removeLast() {
-            throw new RuntimeException("method not implemented");
+        public void removeLast() {
+             deleteAtIndex(size - 1);
         }
 
         public String peekFirst() {
-            throw new RuntimeException("method not implemented");
+            return head.next.val;
         }
 
         public String peekLast() {
-            throw new RuntimeException("method not implemented");
+           return tail.prev.val;
         }
 
         public int size() {
-            throw new RuntimeException("method not implemented");
+            return size;
         }
+
+        public void addAtIndex(int index, String val){
+            Node toAdd = new Node(val);
+            if(index > size) return;
+            if(index < 0) index = 0;
+            Node pred, succ;
+
+            if(index <= size/2){
+                pred = head;
+                for(int i = 0; i < index; i++) pred = pred.next;
+                succ = pred.next;
+            }else{
+                succ = tail;
+                for(int i = 0; i < size - index; i++)  succ = succ.prev;
+                pred = succ.prev;
+            }
+            pred.next = toAdd;
+            toAdd.next = succ;
+            succ.prev = toAdd;
+            toAdd.prev = pred;
+            size++;
+        }
+
+        public void deleteAtIndex(int index){
+            Node pred, succ;
+            if(index < size / 2){
+                pred = head;
+                for(int i = 0; i < index; i++) pred = pred.next;
+                succ = pred.next;
+            }else{
+                succ = tail;
+                for(int i = 0; i < size - index; i++) succ = succ.prev;
+                pred = succ.prev;
+            }
+
+            pred.next = succ.next;
+            succ.next.prev = pred;
+            size--;
+
+        }
+
     }
 
     public static void main(String[] args) {
@@ -72,20 +109,18 @@ public class Solution {
 
         final Deque deque = new Deque();
 
-        // enqueue
         deque.addLast("a");
         deque.addLast("b");
 
         assertTrue(deque.size() == 2, "Test failed, size should be 2");
         assertTrue("a".equals(deque.peekFirst()), "First element should be 'a'");
-        assertTrue("b".equals(deque.peekLast()), "First element should be 'b'");
+        assertTrue("b".equals(deque.peekLast()), "Last element should be 'b'");
 
-        //TODO: add your test cases here
         deque.addFirst("c");
         assertTrue("c".equals(deque.peekFirst()), "First element should be 'c'");
-        assertTrue("b".equals(deque.removeLast()), "First element should be 'b'");
-        assertTrue("a".equals(deque.peekLast()), "First element should be 'a'");
-        assertTrue("c".equals(deque.removeFirst()), "First element should be 'c'");
+        deque.removeLast();
+        assertTrue("a".equals(deque.peekLast()), "Last element should be 'a'");
+        deque.removeFirst();
         assertTrue("a".equals(deque.peekFirst()), "First element should be 'a'");
         assertTrue(deque.size() == 1, "Test failed, size should be 1");
     };

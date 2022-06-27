@@ -47,6 +47,21 @@ public class Solution {
             addAtIndex(size, val);
         }
 
+        public int peekFirst() {
+            return head.next.val;
+        }
+
+        public int peekLast() {
+            return tail.prev.val;
+        }
+        public void removeFirst() {
+            deleteAtIndex(0);
+        }
+
+        public void removeLast() {
+            deleteAtIndex(size - 1);
+        }
+
         public void addAtIndex(int index, int val) {
             Node toAdd = new Node(val);
             if(index > size) return;
@@ -90,6 +105,10 @@ public class Solution {
             size--;
         }
 
+        public int size(){
+            return size;
+        }
+
     }
 
     public static void main(String[] args) {
@@ -105,7 +124,20 @@ public class Solution {
     private static void doTestsPass() throws Exception {
 
         final MyDoublyLinkedList doublyLinkedList = new MyDoublyLinkedList();
-        // enqueue
+        doublyLinkedList.addAtHead(1);
+        doublyLinkedList.addAtHead(2);
+
+        assertTrue(doublyLinkedList.size() == 2, "Test failed, size should be 2");
+        assertTrue(2 == doublyLinkedList.peekFirst(), "First element should be '2'");
+        assertTrue(1 == doublyLinkedList.peekLast(), "Last element should be '1'");
+
+        doublyLinkedList.addAtHead(3);
+        assertTrue(3 == doublyLinkedList.peekFirst(), "First element should be '3'");
+        doublyLinkedList.removeLast();
+        assertTrue(2 == doublyLinkedList.peekLast(), "Last element should be '2'");
+        doublyLinkedList.removeFirst();
+        assertTrue(2 == doublyLinkedList.peekFirst(), "First element should be '2'");
+        assertTrue(doublyLinkedList.size() == 1, "Test failed, size should be 1");
     };
 
     private static void assertTrue(boolean condition, String message) throws Exception {

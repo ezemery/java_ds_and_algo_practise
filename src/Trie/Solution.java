@@ -12,7 +12,7 @@ public class Solution {
         }
     }
 
-    TrieNode root = new TrieNode(' ');;
+    TrieNode root = new TrieNode(' ');
 
     public void insert(String word) {
         TrieNode node = root;

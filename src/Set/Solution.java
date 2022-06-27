@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+//Implementing a set using a LinkedList Bucket
 public class Solution {
 
     class Bucket{
@@ -12,7 +13,7 @@ public class Solution {
             bucket = new LinkedList<>();
         }
         public void add(int key) {
-            if(contains(key)){
+            if(bucket.contains(key)){
                 return;
             }else{
                 bucket.add(key);

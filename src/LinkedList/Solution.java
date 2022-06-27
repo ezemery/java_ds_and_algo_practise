@@ -73,7 +73,6 @@ public class Solution {
     private static void doTestsPass() throws Exception {
 
         final MyLinkedList linkedList = new MyLinkedList();
-        // enqueue
     };
 
     private static void assertTrue(boolean condition, String message) throws Exception {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+//Implementing a map using a LinkedList Bucket
 public class Solution {
     class Pair{
         int first;
