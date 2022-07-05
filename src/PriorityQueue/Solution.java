@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Solution {
 
-    public static class minPQ{
+    public static class minHeap{
         boolean reverseOrder = false;
         List<Integer> list;
 
 
-        public minPQ(){
+        public minHeap(){
             list = new ArrayList<>();
         }
 
@@ -64,11 +64,11 @@ public class Solution {
         }
     }
 
-    public static class maxPQ{
+    public static class maxHeap{
         List<Integer> list;
 
 
-        public maxPQ(){
+        public maxHeap(){
             list = new ArrayList<>();
         }
 
@@ -126,9 +126,9 @@ public class Solution {
 
         public PriorityQueue(boolean reverseOrder){
             if(reverseOrder){
-                new maxPQ();
+                new maxHeap();
             }else{
-                new minPQ();
+                new minHeap();
             }
         }
     }
